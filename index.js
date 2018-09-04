@@ -13,11 +13,10 @@ app.get('/', function (req, res) {
 })
 
 app.post('/azmoon', function (req, res) {
-     console.log(req.body)
      fs.readFile("razmara.html", "utf8", function(err, data) {
         const $ = cheerio.load(data)
         $('input[type="text"]').each(function(i) {
-            $(this).replaceWith(req.body['' + i])
+            $(this).replaceWith(' ' + req.body.in[i])
         })
         const filename = Math.random().toString(36).substr(2, 5)
         fs.writeFile(filename + '.html', $.html(), () => {

@@ -48,7 +48,7 @@
                 display: inline-block;
                 margin: 0;
                 width: 33.33%;
-                border: 1px solid green;
+                /* border: 1px solid green; */
                 /* background-color: red; */
             }
             * {
@@ -80,10 +80,22 @@
     </head>
     <body dir="rtl" style="margin: 0; width: 794px; padding: 25px;">
         <form method="POST" action="/azmoon">
-            <div id="header" style="display: flex">
-                <div class="onethird"><img style="text-align: left" src="./logo.png" alt=""></div>
+            <div id="header" style="display: flex; margin-bottom: 10px">
+                <div class="onethird"><img style="text-align: left" src="./static/khadamat-logo.png" width="100" alt=""></div>
                 <div class="onethird"><h2 style="text-align: center; font-family: persianbold">فرم گواهینامه آزمون</h2></div>
-                <div class="onethird">تاشدبیستبدسریخ</div>
+                <div class="onethird title" style="padding-right: 130px; padding-top: 35px">
+                    شماره گواهینامه:
+                    <input type="text" name="in">
+                    <br />
+                    تاریخ صدور:
+                    <input type="text" name="in">
+                    <br />
+                    پیوست:
+                    <input type="text" name="in">
+                    <br />
+                    صفحه ۱ از
+                    <input type="text" name="in">
+                </div>
             </div>
             <div id="table">
                 <table>
@@ -109,24 +121,134 @@
                     <td style="width: 80%"></td>
                 </table>
                 <table>
-                    <td style="width: 40%"><span class="title">نام شخص حقیقی/ حقوقی:</span><input type="text" name="0"></td>
-                    <td style="width: 30%"><span class="title">شماره اقتصادی:</span><input type="text" name="1"></td>
-                    <td style="width: 30%"><span class="title">شناسه ملی / شماره ثبت:</span><input type="text" name="2"></td>
+                    <td style="width: 40%"><span class="title">نام شخص حقیقی/ حقوقی:</span><input type="text" name="in"></td>
+                    <td style="width: 30%"><span class="title">شماره اقتصادی:</span><input type="text" name="in"></td>
+                    <td style="width: 30%"><span class="title">شناسه ملی / شماره ثبت:</span><input type="text" name="in"></td>
                 </table>
                 <table>
-                    <td><span class="title">نشانی کامل:</span><input type="text" name="3"></td>
+                    <td><span class="title">نشانی کامل:</span><input type="text" name="in"></td>
                 </table>
                 <table>
-                    <td><span class="title">کد پستی:</span><input type="text" name="4"></td>
-                    <td><span class="title">تلفن:</span><input type="text" name="5"></td>
-                    <td><span class="title">شماره همراه:</span><input type="text" name="6" value="something"></td>
-                    <td><span class="title">دورنگار:</span><input type="text" name="7" value="something"></td>
+                    <td style="width: 30%"><span class="title">کد پستی:</span><input type="text" name="in"></td>
+                    <td style="width: 20%"><span class="title">تلفن:</span><input type="text" name="in"></td>
+                    <td style="width: 20%"><span class="title">شماره همراه:</span><input type="text" name="in"></td>
+                    <td style="width: 30%"><span class="title">دورنگار:</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td style="width: 20%; background-color: #ddd"><span class="title">مشخصات درخواست</span></td>
+                        <td style="width: 80%"></td>
+                </table>
+                <table>
+                        <td style="width: 25%"><span class="title">شماره درخواست:</span><input type="text" name="in"></td>
+                        <td style="width: 25%"><span class="title">تاریخ درخواست:</span><input type="text" name="in"></td>
+                        <td style="width: 50%"></td>
+                </table>
+                <table>
+                        <td style="width: 50%"><span class="title">نام آزمون:</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">تاریخ دریافت نمونه:</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td><span class="title">استاندارد/روش اجرايي :</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td style="width: 50%"><span class="title">نام آزمایشگاه :</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">تاریخ انجام آزمون :</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td style="width: 20%; background-color: #ddd"><span class="title">مشخصات مرجع مورد استفاده</span></td>
+                        <td style="width: 80%"></td>
+                </table>
+                <table>
+                        <td style="width: 40%"><span class="title">نام دستگاه:</span><input type="text" name="in"></td>
+                        <td style="width: 30%"><span class="title">کد دستگاه:</span><input type="text" name="in"></td>
+                        <td style="width: 30%"><span class="title">دقت دستگاه:</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td style="width: 20%; background-color: #ddd"><span class="title">شرايط محيطي:</span></td>
+                        <td style="width: 80%"></td>
+                </table>
+                <table>
+                        <td style="width: 20%"><span class="title">دما:</span><input type="text" name="in"></td>
+                        <td style="width: 15%"><span class="title">رطوبت:</span><input type="text" name="in"></td>
+                        <td style="width: 15%"><span class="title">فشار:</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">غیره:</span><input type="text" name="in"></td>
+                </table>
+                <table>
+                        <td style="width: 20%; background-color: #ddd"><span class="title">نتايج آزمون:</span></td>
+                        <td style="width: 80%"></td>
+                </table>
+                <table style="text-align: center">
+                    <tr style="background-color: #eee">
+                        <td class="title" style="width: 5%">ردیف</td>
+                        <td class="title" style="width: 14.9%">نمونه مورد آزمون</td>
+                        <td class="title" style="width: 30.1%">نتیجه آزمون</td>
+                        <td class="title" style="width: 25%">عدم قطعیت</td>
+                        <td class="title" style="width: 25%">توضیحات</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                        <td><input type="text" name="in"></td>
+                    </tr>
                 </table>
                 <table style="height: 70px">
-                    <td style="width: 200px">sas</td>
-                    <td style="width: 200px">جناب رزم آرا</td>
-                    <td style="width: 200px"></td>
-                    <td style="width: 300px"></td>
+                    <td class="title" style="width: 20%">
+                        آزمایش کننده:
+                        <br />
+                        <input type="text" name="in">
+                        <br />
+                        <br />
+                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                    </td>
+                    <td class="title" style="width: 30.1%">
+                        تایید کننده: مدیر فنی
+                        <br />
+                        <input type="text" name="in">
+                        <br />
+                        <br />
+                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                    </td>
+                    <td class="title" style="width: 24.9%">
+                        مدیر مرکز خدمات آزمایشگاهی:
+                        <br />
+                        <input type="text" name="in">
+                        <br />
+                        <br />
+                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                    </td>
+                    <td class="title" style="width: 25%">
+                        مهر آزمایشگاه
+                    </td>
                 </table>
             </div>
             <input type="checkbox" checked> پیوست دارد
