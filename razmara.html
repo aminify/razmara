@@ -67,6 +67,10 @@
                 height: 25px;
                 font-size: 10pt;
             }
+            .error {
+                border: 1px solid red;
+                background-color: #fee;
+            }
             table, td {
                 /* border: 1px solid black; */
                 border-top: 1px solid black;
@@ -79,7 +83,7 @@
         </style>
     </head>
     <body dir="rtl" style="margin: 0; width: 794px; padding: 25px;">
-        <form method="POST" action="/azmoon">
+        <form id="form" method="POST" action="/azmoon" autocomplete="off">
             <div id="header" style="display: flex; margin-bottom: 10px">
                 <div class="onethird"><img style="text-align: left" src="./static/khadamat-logo.png" width="100" alt=""></div>
                 <div class="onethird"><h2 style="text-align: center; font-family: persianbold">فرم گواهینامه آزمون</h2></div>
@@ -151,7 +155,13 @@
                         <td><span class="title">استاندارد/روش اجرايي :</span><input type="text" name="in"></td>
                 </table>
                 <table>
-                        <td style="width: 50%"><span class="title">نام آزمایشگاه :</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">نام آزمایشگاه :</span>
+                            <select name="in">
+                                <option value="آزمایشگاه صنایع">آزمایشگاه صنایع</option>
+                                <option value="آزمایشگاه نانو">آزمایشگاه نانو</option>
+                                <option value="آزمایشگاه هسته ای">آزمایشگاه هسته ای</option>
+                            </select>
+                        </td>
                         <td style="width: 50%"><span class="title">تاریخ انجام آزمون :</span><input type="text" name="in"></td>
                 </table>
                 <table>
@@ -168,7 +178,7 @@
                         <td style="width: 80%"></td>
                 </table>
                 <table>
-                        <td style="width: 20%"><span class="title">دما:</span><input type="text" name="in"></td>
+                        <td style="width: 20%"><span class="title">دما (&deg;C): </span><div style="display: inline-block;"><input type="text" name="in"></div></td>
                         <td style="width: 15%"><span class="title">رطوبت:</span><input type="text" name="in"></td>
                         <td style="width: 15%"><span class="title">فشار:</span><input type="text" name="in"></td>
                         <td style="width: 50%"><span class="title">غیره:</span><input type="text" name="in"></td>
@@ -255,5 +265,30 @@
             <br />
             <input type="submit" value="تایید">
         </form>
+        <script>
+            var form = document.getElementById('form')
+            form.addEventListener('submit', function(e) {
+                var ins = document.getElementsByName('in')
+                var mustFills = [4, 5]
+                var error = false
+                for(var i = 0; i < mustFills.length; i++) {
+                    var el = ins[mustFills[i]]
+                    if (el.value.length === 0) {
+                        if (!el.classList.contains('error')) {
+                            el.classList.add('error')
+                        }
+                        error = true;
+                    } else {
+                        if (el.classList.contains('error')) {
+                            el.classList.remove('error')
+                        }
+                    }
+                }
+                if (error === true) {
+                    e.preventDefault();
+                    alert('لطفا موارد با کادر قرمز را پر کنید!')
+                }                
+            })
+        </script>
     </body>
 </html>
