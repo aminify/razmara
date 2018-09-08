@@ -83,7 +83,7 @@
         </style>
     </head>
     <body dir="rtl" style="margin: 0; width: 794px; padding: 25px;">
-        <form id="form" method="POST" action="/azmoon" autocomplete="off">
+        <form id="form" method="POST" action="/azmoon" enctype="multipart/form-data" autocomplete="off">
             <div id="header" style="display: flex; margin-bottom: 10px">
                 <div class="onethird"><img style="text-align: left" src="./static/khadamat-logo.png" width="100" alt=""></div>
                 <div class="onethird"><h2 style="text-align: center; font-family: persianbold">فرم گواهینامه آزمون</h2></div>
@@ -261,7 +261,8 @@
                     </td>
                 </table>
             </div>
-            <input type="checkbox" checked> پیوست دارد
+            <!-- <input type="checkbox"> پیوست دارد -->
+            <input type="file" name="attach">
             <br />
             <input type="submit" value="تایید">
         </form>
