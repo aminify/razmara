@@ -89,7 +89,7 @@
                 <div class="onethird"><h2 style="text-align: center; font-family: persianbold">فرم گواهینامه آزمون</h2></div>
                 <div class="onethird title" style="padding-right: 130px; padding-top: 35px">
                     شماره گواهینامه:
-                    <input type="text" name="in">
+                    <input type="text" name="in" required>
                     <br />
                     تاریخ صدور:
                     <input type="text" name="in">
@@ -156,10 +156,16 @@
                 </table>
                 <table>
                         <td style="width: 50%"><span class="title">نام آزمایشگاه :</span>
-                            <select name="in">
-                                <option value="آزمایشگاه صنایع">آزمایشگاه صنایع</option>
-                                <option value="آزمایشگاه نانو">آزمایشگاه نانو</option>
-                                <option value="آزمایشگاه هسته ای">آزمایشگاه هسته ای</option>
+                            <select name="in" required>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="X-Ray">X-Ray</option>
+                                <option value="ICP">ICP</option>
+                                <option value="Gas Cal">Gas Cal</option>
+                                <option value="Water">Water</option>
+                                <option value="AFM">AFM</option>
+                                <option value="SEM">SEM</option>
+                                <option value="DLS">DLS</option>
+                                <option value="Mechanic">Mechanic</option>
                             </select>
                         </td>
                         <td style="width: 50%"><span class="title">تاریخ انجام آزمون :</span><input type="text" name="in"></td>
@@ -178,10 +184,33 @@
                         <td style="width: 80%"></td>
                 </table>
                 <table>
-                        <td style="width: 20%"><span class="title">دما (&deg;C): </span><div style="display: inline-block;"><input type="text" name="in"></div></td>
-                        <td style="width: 15%"><span class="title">رطوبت:</span><input type="text" name="in"></td>
-                        <td style="width: 15%"><span class="title">فشار:</span><input type="text" name="in"></td>
-                        <td style="width: 50%"><span class="title">غیره:</span><input type="text" name="in"></td>
+                        <td style="width: 20%"><span class="title">دما (
+                            <select name="in" required>
+                                <option value="&deg;C">&deg;C</option>
+                                <option value="F">F</option>
+                                <option value="K">K</option>
+                            </select>
+                            ):
+                        </span><div style="display: inline-block;"><input type="text" name="in"></div></td>
+                        <td style="width: 20%"><span class="title">رطوبت (
+                                <select name="in" required>
+                                    <option value="%">%</option>
+                                </select>
+                            ):
+                        </span><div style="display: inline-block;"><input type="text" name="in"></div></td>
+                        <td style="width: 20%"><span class="title">فشار (
+                                <select name="in" required>
+                                    <option value="atm">atm</option>
+                                    <option value="mmHg">mmHg</option>
+                                    <option value="mmH2O">mmH2O</option>
+                                    <option value="bar">bar</option>
+                                    <option value="mbar">mbar</option>
+                                    <option value="Pa">Pa</option>
+                                    <option value="KPa">KPa</option>                                    
+                                </select>
+                            ):
+                        </span><div style="display: inline-block;"><input type="text" name="in"></div></td>
+                        <td style="width: 40%"><span class="title">غیره:</span><div style="display: inline-block;"><input type="text" name="in"></div></td>
                 </table>
                 <table>
                         <td style="width: 20%; background-color: #ddd"><span class="title">نتايج آزمون:</span></td>
@@ -262,11 +291,11 @@
                 </table>
             </div>
             <!-- <input type="checkbox"> پیوست دارد -->
-            <input type="file" name="attach">
+            <input type="file" name="attach" required>
             <br />
             <input type="submit" value="تایید">
         </form>
-        <script>
+        <!-- <script>
             var form = document.getElementById('form')
             form.addEventListener('submit', function(e) {
                 var ins = document.getElementsByName('in')
@@ -290,6 +319,6 @@
                     alert('لطفا موارد با کادر قرمز را پر کنید!')
                 }                
             })
-        </script>
+        </script> -->
     </body>
 </html>
