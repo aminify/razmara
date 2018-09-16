@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="static/persianDatepicker-default.css" />
         <style>
             @media print {
                 @page { margin: 0; }
@@ -92,7 +94,7 @@
                     <input type="text" name="in" required>
                     <br />
                     تاریخ صدور:
-                    <input type="text" name="in">
+                    <input type="text" name="in" class="date">
                     <br />
                     پیوست:
                     <input type="text" name="in">
@@ -144,12 +146,12 @@
                 </table>
                 <table>
                         <td style="width: 25%"><span class="title">شماره درخواست:</span><input type="text" name="in"></td>
-                        <td style="width: 25%"><span class="title">تاریخ درخواست:</span><input type="text" name="in"></td>
+                        <td style="width: 25%"><span class="title">تاریخ درخواست:</span><input type="text" name="in" class="date"></td>
                         <td style="width: 50%"></td>
                 </table>
                 <table>
                         <td style="width: 50%"><span class="title">نام آزمون:</span><input type="text" name="in"></td>
-                        <td style="width: 50%"><span class="title">تاریخ دریافت نمونه:</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">تاریخ دریافت نمونه:</span><input type="text" name="in" class="date"></td>
                 </table>
                 <table>
                         <td><span class="title">استاندارد/روش اجرايي :</span><input type="text" name="in"></td>
@@ -168,7 +170,7 @@
                                 <option value="Mechanic">Mechanic</option>
                             </select>
                         </td>
-                        <td style="width: 50%"><span class="title">تاریخ انجام آزمون :</span><input type="text" name="in"></td>
+                        <td style="width: 50%"><span class="title">تاریخ انجام آزمون :</span><input type="text" name="in" class="date"></td>
                 </table>
                 <table>
                         <td style="width: 20%; background-color: #ddd"><span class="title">مشخصات مرجع مورد استفاده</span></td>
@@ -290,11 +292,27 @@
                     </td>
                 </table>
             </div>
-            <!-- <input type="checkbox"> پیوست دارد -->
-            <input type="file" name="attach" required>
-            <br />
+            <h3>فایل های پیوست:</h3>
+            <div id="plus" style="margin: 10px 30px; background-image: url(static/plus.png); background-size: 100%; width: 30px; height: 30px; cursor: pointer;"></div>
             <input type="submit" value="تایید">
         </form>
+        <script src="static/jquery-1.10.1.min.js" ></script>
+        <script src="static/persianDatepicker.min.js"></script>
+        <script>
+            $('.date').persianDatepicker({ persianNumbers: false })
+            document.getElementById('plus').addEventListener('click', function(){
+                document.getElementById('plus').insertAdjacentHTML('beforebegin', `
+                    <div style="display: flex; margin: 2px;">
+                        <div
+                            style="cursor: pointer; margin: 4px; background-image: url(static/cross.png); background-size: 100%; display: inline-block; width: 12px; height: 12px;"
+                            onclick="this.parentElement.remove()"
+                        >
+                        </div>
+                        <input type="file" name="attach" required>
+                    </div>
+                `)
+            })
+        </script>
         <!-- <script>
             var form = document.getElementById('form')
             form.addEventListener('submit', function(e) {
