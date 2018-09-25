@@ -34,49 +34,64 @@ app.post('/azmoon', upload.array('attach'), function (req, res) {
         fs.writeFile(path.join(__dirname, filename) + '.html', $.html(), () => {
             exec(`google-chrome --headless --disable-gpu --print-to-pdf=${path.join(__dirname, filename)}.pdf ${path.join(__dirname, filename)}.html`, () => {
                 if (req.files.length > 0) {
-                    try {
-                        const pdfaccPath = path.join(__dirname, Date.now() + '.pdf')
-                        let pdfacc = new HummusRecipe('new', pdfaccPath)
-                        for(let i = 0; i < req.files.length; i++) {
-                            pdfacc.appendPage(req.files[i].path)
-                        }
-                        pdfacc.endPDF(() => {
-                            let attachedpdf = new HummusRecipe(pdfaccPath, pdfaccPath)
-                            for (let i = 1; i <= attachedpdf.metadata.pages; i++) {
-                                attachedpdf = attachedpdf.editPage(i)
-                                    .image(path.join(__dirname, 'static', 'khadamat-logo.png'), 480, 0, {width: 75, keepAspectRatio: true})
-                                    .text('Certificate NO: ' + req.body.in[0], 230, 30)
-                                    .endPage()
-                            }
-                            attachedpdf.endPDF(() => {
-                                let pdf = new HummusRecipe(path.join(__dirname, filename + '.pdf'), path.join(__dirname, filename + '.pdf'))
-                                pdf = pdf.appendPage(pdfaccPath)
-                                pdf.endPDF(() => {
-                                    let finalpdf = new HummusRecipe(path.join(__dirname, filename + '.pdf'), path.join(__dirname, filename + 'final.pdf'))
-                                    for (let i = 1; i <= finalpdf.metadata.pages; i++) {
-                                        finalpdf = finalpdf.editPage(i).text(`page ${i}/${finalpdf.metadata.pages}`, 50, 30).endPage()
+                    const footer = $('.footer')
+                    $('body').empty()
+                    $('body').append(footer)
+                    fs.writeFile(path.join(__dirname, filename) + '.html', $.html(), () => {
+                        exec(`google-chrome --headless --disable-gpu --screenshot=${path.join(__dirname, filename)}.png --window-size=794,150 ${path.join(__dirname, filename)}.html`, () => {
+                            try {
+                                const pdfaccPath = path.join(__dirname, Date.now() + '.pdf')
+                                let pdfacc = new HummusRecipe('new', pdfaccPath)
+                                for(let i = 0; i < req.files.length; i++) {
+                                    pdfacc.appendPage(req.files[i].path)
+                                }
+                                pdfacc.endPDF(() => {
+                                    let attachedpdf = new HummusRecipe(pdfaccPath, pdfaccPath)
+                                    for (let i = 1; i <= attachedpdf.metadata.pages; i++) {
+                                        attachedpdf = attachedpdf.editPage(i)
+                                            .image(path.join(__dirname, 'static', 'khadamat-logo.png'), 480, 0, {width: 75, keepAspectRatio: true})
+                                            .text('Certificate NO: ' + req.body.in[0], 230, 30)
+                                            .image(path.join(__dirname, filename) + '.png', 0, 730, {width: 595, keepAspectRatio: true})
+                                            .endPage()
                                     }
-                                    finalpdf.endPDF(() => {
-                                        res.sendFile(path.join(__dirname, filename + 'final.pdf'), undefined, () => {
-                                            fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
-                                            fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
-                                            fs.unlink(path.join(__dirname, filename + '.html'), () => {})
+                                    attachedpdf.endPDF(() => {
+                                        let pdf = new HummusRecipe(path.join(__dirname, filename + '.pdf'), path.join(__dirname, filename + '.pdf'))
+                                        pdf = pdf.appendPage(pdfaccPath)
+                                        pdf.endPDF(() => {
+                                            let finalpdf = new HummusRecipe(path.join(__dirname, filename + '.pdf'), path.join(__dirname, filename + 'final.pdf'))
+                                            for (let i = 1; i <= finalpdf.metadata.pages; i++) {
+                                                finalpdf = finalpdf.editPage(i).text(`page ${i}/${finalpdf.metadata.pages}`, 30, 30).endPage()
+                                            }
+                                            finalpdf.endPDF(() => {
+                                                res.sendFile(path.join(__dirname, filename + 'final.pdf'), undefined, () => {
+                                                    fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
+                                                    fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
+                                                    fs.unlink(path.join(__dirname, filename + '.html'), () => {})
+                                                    fs.unlink(path.join(__dirname, filename + '.png'), () => {})
+                                                    fs.unlink(pdfaccPath, () => {})
+                                                })
+                                            })
                                         })
                                     })
                                 })
-                            })
+                            } catch (err) {
+                                res.send('<body dir="rtl">فایل ارسالی قابل پردازش نبود. لطفا از pdf بودن فرمت اطمینان حاصل کنید.</body>')
+                                fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
+                                fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
+                                fs.unlink(path.join(__dirname, filename + '.html'), () => {})
+                                fs.unlink(path.join(__dirname, filename + '.png'), () => {})
+                                fs.unlink(pdfaccPath, () => {})
+                            }
                         })
-                    } catch (err) {
-                        res.send('<body dir="rtl">فایل ارسالی قابل پردازش نبود. لطفا از pdf بودن فرمت اطمینان حاصل کنید.</body>')
-                        fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
-                        fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
-                        fs.unlink(path.join(__dirname, filename + '.html'), () => {})
-                    }
+                    })
                 } else {
-                    res.sendFile(path.join(__dirname, filename + '.pdf'), undefined, () => {
-                        fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
-                        fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
-                        fs.unlink(path.join(__dirname, filename + '.html'), () => {})
+                    let finalpdf = new HummusRecipe(path.join(__dirname, filename + '.pdf'), path.join(__dirname, filename + 'final.pdf'))
+                    finalpdf.editPage(1).text(`page 1/1`, 30, 30).endPage().endPDF(() => {
+                        res.sendFile(path.join(__dirname, filename + 'final.pdf'), undefined, () => {
+                            fs.unlink(path.join(__dirname, filename + '.pdf'), () => {})
+                            fs.unlink(path.join(__dirname, filename + 'final.pdf'), () => {})
+                            fs.unlink(path.join(__dirname, filename + '.html'), () => {})
+                        })
                     })
                 }
             })

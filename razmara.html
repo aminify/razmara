@@ -17,6 +17,9 @@
                     width: 210mm;
                     height: 297mm;
                 }
+                .no-print, .no-print * {
+                    display: none !important;
+                }
             /* ... the rest of the rules ... */
             }
             @font-face {
@@ -33,6 +36,10 @@
                 font-family: persianbold;
                 src: url(static/BNaznnBd.ttf);
                 unicode-range: U+0600-08FF;
+            }
+            @font-face {
+                font-family: cookie;
+                src: url(static/Cookie-Regular.ttf)
             }
             /* @media print {
                 #table {
@@ -84,23 +91,33 @@
             }
         </style>
     </head>
-    <body dir="rtl" style="margin: 0; width: 794px; padding: 25px;">
+    <body dir="rtl" style="margin: 0 auto; width: 794px; padding: 40px 40px;">
         <form id="form" method="POST" action="/azmoon" enctype="multipart/form-data" autocomplete="off">
             <div id="header" style="display: flex; margin-bottom: 10px">
-                <div class="onethird"><img style="text-align: left" src="./static/khadamat-logo.png" width="100" alt=""></div>
-                <div class="onethird"><h2 style="text-align: center; font-family: persianbold">فرم گواهینامه آزمون</h2></div>
-                <div class="onethird title" style="padding-right: 130px; padding-top: 35px">
-                    شماره گواهینامه:
-                    <input type="text" name="in" required>
-                    <br />
-                    تاریخ صدور:
-                    <input type="text" name="in" class="date">
-                    <br />
-                    پیوست:
-                    <input type="text" name="in">
-                    <br />
-                    صفحه ۱ از
-                    <input type="text" name="in">
+                <div class="onethird">
+                    <img style="text-align: left" src="./static/khadamat-logo.png" width="100" alt="">
+                    <div class="title" style="padding-top: 10px; width: 50%">
+                        شماره گواهینامه:
+                        <input type="text" name="in" required>
+                        <br />
+                        تاریخ صدور:
+                        <input type="text" name="in" class="date">
+                        <!-- <br />
+                        پیوست:
+                        <input type="text" name="in"> -->
+                    </div>
+                </div>
+                <div class="onethird">
+                    <h2 style="text-align: center; font-family: persianbold">گواهینامه آزمون</h2>
+                    <h2 style="text-align: center; font-weight: normal; font-size: 25pt; font-family: cookie">Test Certificate</h2>
+                </div>
+                <div class="onethird">
+                    <div style="text-align: left">
+                        <img src="./static/salahiat-logo.GIF" width="100px" style="padding-top: 30px">
+                    </div>
+                    <div style="text-align: left">
+                        NACI/LAB/953
+                    </div>
                 </div>
             </div>
             <div id="table">
@@ -262,39 +279,61 @@
                         <td><input type="text" name="in"></td>
                     </tr>
                 </table>
-                <table style="height: 70px">
-                    <td class="title" style="width: 20%">
-                        آزمایش کننده:
-                        <br />
-                        <input type="text" name="in">
-                        <br />
-                        <br />
-                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
-                    </td>
-                    <td class="title" style="width: 30.1%">
-                        تایید کننده: مدیر فنی
-                        <br />
-                        <input type="text" name="in">
-                        <br />
-                        <br />
-                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
-                    </td>
-                    <td class="title" style="width: 24.9%">
-                        مدیر مرکز خدمات آزمایشگاهی:
-                        <br />
-                        <input type="text" name="in">
-                        <br />
-                        <br />
-                        <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
-                    </td>
-                    <td class="title" style="width: 25%">
-                        مهر آزمایشگاه
-                    </td>
-                </table>
+                <div class="footer">
+                    <table style="height: 70px">
+                        <td class="title" style="width: 20%">
+                            آزمایش کننده:
+                            <br />
+                            <input type="text" name="in">
+                            <br />
+                            <br />
+                            <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                        </td>
+                        <td class="title" style="width: 30.1%">
+                            تایید کننده: مدیر فنی
+                            <br />
+                            <input type="text" name="in">
+                            <br />
+                            <br />
+                            <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                        </td>
+                        <td class="title" style="width: 24.9%">
+                            مدیر مرکز خدمات آزمایشگاهی:
+                            <br />
+                            <input type="text" name="in">
+                            <br />
+                            <br />
+                            <span class="title" style="width: 100%; display: inline-block; text-align: left">امضا</span>
+                        </td>
+                        <td class="title" style="width: 25%">
+                            مهر آزمایشگاه
+                        </td>
+                    </table>
+                </div>
             </div>
-            <h3>فایل های پیوست:</h3>
-            <div id="plus" style="margin: 10px 30px; background-image: url(static/plus.png); background-size: 100%; width: 30px; height: 30px; cursor: pointer;"></div>
-            <input type="submit" value="تایید">
+            <div style="text-align: left">
+                ‫‪CLDCFR94040R00‬‬
+            </div>
+            <div class="title" style="font-size: 10pt">توضیحات ضروری:</div>
+            <ul>
+                <li>
+                        در آزمايشگاه هاي مركز خدمات آزمایشگاهی دانشگاه صنعتی شریف باتوجه به مؤلفه هاي مؤثر در نتايج آزمون عدم قطعيت با ضريب K=2 يا سطح اطمينان 95% محاسبه گرديده است.
+                </li>
+                <li>
+                        این سند بدون مهر و امضاء مرکز خدمات آزمایشگاهی فاقد اعتبار است .هرگونه کپی برداری بدون کسب مجوز ازمرکز خدمات آزمایشگاهی غیر مجاز است.
+                </li>
+                <li>
+                        باقیمانده نمونه های مورد آزمون  با توافق مشتری حداکثر به مدت <input type="text" name="in" style="width: 20px;"> روز  نگهداری خواهد شد.
+                </li>
+            </ul>
+            <div style="border-bottom: 1px solid black; display: inline">
+                    لطفاً در صورت وجود هر گونه ابهام در محتوای گزارش و یا نیاز به کسب اطلاعات  بیشتر با مرکز خدمات آزمایشگاهی تماس حاصل فرمایید.
+            </div>
+            <div class="no-print">
+                <h3>فایل های پیوست:</h3>
+                <div id="plus" style="margin: 10px 30px; background-image: url(static/plus.png); background-size: 100%; width: 30px; height: 30px; cursor: pointer;"></div>
+                <input type="submit" value="تایید">
+            </div>
         </form>
         <script src="static/jquery-1.10.1.min.js" ></script>
         <script src="static/persianDatepicker.min.js"></script>
